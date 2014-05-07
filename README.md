@@ -12,5 +12,10 @@ Setup
 -----
 * Download  [Vuforia SDK v2.8][1]
 * Clone this repository into sdk samples folder
+* cd vuforia-jpct
+* run`ndk-build`, please be sure that you have already setup android
+  env, include SDK and NDK [Android NDK][2]
+* Install to cellphone, you can via android studio or other tools
 
 [1]: https://developer.vuforia.com/resources/sdk/android
+[2]: https://developer.vuforia.com/resources/sdk/android
