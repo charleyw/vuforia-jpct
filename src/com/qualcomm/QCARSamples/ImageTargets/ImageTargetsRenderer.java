@@ -5,9 +5,6 @@
 
 package com.qualcomm.QCARSamples.ImageTargets;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLSurfaceView;
 import android.util.DisplayMetrics;
 
@@ -16,14 +13,21 @@ import com.threed.jpct.Camera;
 import com.threed.jpct.Config;
 import com.threed.jpct.FrameBuffer;
 import com.threed.jpct.Light;
+import com.threed.jpct.Loader;
+import com.threed.jpct.Matrix;
 import com.threed.jpct.Object3D;
-import com.threed.jpct.Primitives;
 import com.threed.jpct.SimpleVector;
 import com.threed.jpct.Texture;
 import com.threed.jpct.TextureManager;
 import com.threed.jpct.World;
 import com.threed.jpct.util.BitmapHelper;
 import com.threed.jpct.util.MemoryHelper;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 
 /** The renderer class for the ImageTargets sample. */
@@ -49,8 +53,8 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
 	private float fov;
 
 	private float fovy;
-    
-    
+    private Object3D sofa;
+
     /** Native function for initializing the renderer. */
     public native void initRendering();
     
@@ -72,29 +76,44 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
 		if (!txtMgr.containsTexture("texture")) {
 			Texture texture = new Texture(BitmapHelper.rescale(
 					BitmapHelper.convert(mActivity.getResources().getDrawable(R.drawable.vuforia_splash)), 64, 64));
-			txtMgr.addTexture("texture", texture);
+			txtMgr.addTexture("wool256.jpg", texture);
 		}
 
-		cube = Primitives.getCylinder(20, 40);
-		cube.calcTextureWrapSpherical();
-		cube.setTexture("texture");
-		cube.strip();
-		cube.build();
+        try {
+            sofa = loadModel(mActivity.getAssets().open("sofa1.obj"), mActivity.getAssets().open("sofa1.mtl"), 1f);
+            sofa.translate(new SimpleVector(-116.768383932224, 36.1243398942542, 0));
+            world.addObjects(sofa);
 
-		world.addObject(cube);
+            cam = world.getCamera();
 
-		cam = world.getCamera();
+            SimpleVector sv = new SimpleVector();
+            sv.set(sofa.getTransformedCenter());
+            sv.y += 100;
+            sv.z += 100;
 
-		SimpleVector sv = new SimpleVector();
-		sv.set(cube.getTransformedCenter());
-		sv.y += 100;
-		sv.z += 100;
-		
-		sun.setPosition(sv);
-		
-		MemoryHelper.compact();
+            sun.setPosition(sv);
+
+            MemoryHelper.compact();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
-    
+
+    private Object3D loadModel(InputStream objFile, InputStream mtlFile, float scale) {
+
+        Object3D[] model = Loader.loadOBJ(objFile, mtlFile, scale);
+        Object3D o3d = new Object3D(0);
+        Object3D temp = null;
+        for (int i = 0; i < model.length; i++) {
+            temp = model[i];
+            temp.setCenter(SimpleVector.ORIGIN);
+            temp.setRotationMatrix(new Matrix());
+            o3d = Object3D.mergeObjects(o3d, temp);
+            o3d.build();
+        }
+        return o3d;
+    }
     
     /** Called when the surface is created or recreated. */
     public void onSurfaceCreated(GL10 gl, EGLConfig config)
