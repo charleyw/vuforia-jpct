@@ -25,6 +25,9 @@ import com.threed.jpct.util.MemoryHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -53,6 +56,8 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
 	private float fov;
 
 	private float fovy;
+
+    private Map<String, Object3D> targetModelMap = new HashMap<String, Object3D>();
     private Object3D sofa;
 
     /** Native function for initializing the renderer. */
@@ -82,8 +87,8 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
         try {
             sofa = loadModel(mActivity.getAssets().open("sofa1.obj"), mActivity.getAssets().open("sofa1.mtl"), 1f);
             sofa.translate(new SimpleVector(-116.768383932224, 36.1243398942542, 0));
+            targetModelMap.put("stones", sofa);
             world.addObjects(sofa);
-
             cam = world.getCamera();
 
             SimpleVector sv = new SimpleVector();
@@ -161,7 +166,8 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
         
         // Update render view (projection matrix and viewport) if needed:
         mActivity.updateRenderView();
-        
+
+        updateThe3DObjects();
         // Call our native function to render content
         renderFrame();
         
@@ -171,11 +177,25 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
 		world.draw(fb);
 		fb.display();
     }
-    
+
+    private void updateThe3DObjects() {
+        Enumeration<Object3D> objects = world.getObjects();
+        while(objects.hasMoreElements()){
+            objects.nextElement().setVisibility(false);
+        }
+    }
+
     public void updateModelviewMatrix(float mat[]) {
 		modelViewMat = mat;
 	}
-    
+
+    protected void foundImageTarget(String trackableName) {
+        Object3D object3D = targetModelMap.get(trackableName);
+        if(object3D != null){
+            object3D.setVisibility(true);
+        }
+    }
+
     public void updateCamera() {
 		if (modelViewMat != null) {
 			float[] m = modelViewMat;

@@ -312,6 +312,7 @@ Java_com_qualcomm_QCARSamples_ImageTargets_ImageTargetsRenderer_renderFrame(JNIE
 {
 	jclass activityClass = env->GetObjectClass(obj); //We get the class of out activity
 	jmethodID updateMatrixMethod = env->GetMethodID(activityClass, "updateModelviewMatrix", "([F)V");
+    jmethodID foundImageTargetMethod = env->GetMethodID(activityClass, "foundImageTarget", "(Ljava/lang/String;)V");
 
     // Clear color and depth buffer 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -349,8 +350,13 @@ Java_com_qualcomm_QCARSamples_ImageTargets_ImageTargetsRenderer_renderFrame(JNIE
 		// Passes the model view matrix to java
 		env->SetFloatArrayRegion(modelviewArray, 0, 16, invTranspMV.data);
 		env->CallVoidMethod(obj, updateMatrixMethod, modelviewArray);
-	}
 
+        // tell java the name of trackable found
+        const char* trackableName = trackable.getName();
+        jstring trackableNameJava = env->NewStringUTF(trackableName);
+        env->CallVoidMethod(obj, foundImageTargetMethod,
+                trackableNameJava);
+	}
 
 	// hide the objects when the targets are not detected
 	if (state.getNumTrackableResults() == 0) {
