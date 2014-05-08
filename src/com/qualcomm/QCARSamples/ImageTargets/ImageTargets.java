@@ -352,14 +352,9 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
      */
     private void loadTextures()
     {
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBrass.png",
-            getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
-            getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
-            getAssets()));
-        mTextures
-            .add(Texture.loadTextureFromApk("Buildings.jpeg", getAssets()));
+
+//        mTextures
+//            .add(Texture.loadTextureFromApk("Buildings.jpeg", getAssets()));
     }
     
     

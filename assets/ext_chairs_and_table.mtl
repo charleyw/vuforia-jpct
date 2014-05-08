@@ -1,0 +1,97 @@
+# Blender3D MTL File: ext_chairs_and_table.blend
+# Material Count: 9
+newmtl wood
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.676069 0.557764 0.247251
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd tipical.jpg
+
+
+newmtl revista_caja_falsa_datascopia
+Ns 260.784314
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.245230 1.245230 1.245230
+Ni 1.200000
+d 1.000000
+illum 2
+map_Kd caja_falsa_datascopia.jpg
+
+
+newmtl blanco_sofaEXT
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.440604 0.440604 0.440604
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl lateral_revista_caja_falsa_datascopia
+Ns 66.666667
+Ka 0.000000 0.000000 0.000000
+Kd 0.747174 0.744819 0.744819
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd caja_falsa_datascopia.jpg
+
+
+newmtl madera_blanca
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd tipical.jpg
+
+
+newmtl cojoncisEXT
+Ns 52.941176
+Ka 0.000000 0.000000 0.000000
+Kd 0.125278 0.125278 0.125278
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+
+
+newmtl jarreo_vidre
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.002932 0.041763 0.205404
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 0.001000
+illum 2
+
+
+newmtl orangeglass
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.400940 0.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 0.001000
+illum 2
+
+
+newmtl madera_negra
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.179095 0.179095 0.179095
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd tipical.jpg
+
+

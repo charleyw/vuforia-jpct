@@ -90,9 +90,23 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
             targetModelMap.put("sofa", sofa);
             world.addObjects(sofa);
 
+
             Object3D bed = loadModel(mActivity.getAssets().open("captainsBed.obj"), mActivity.getAssets().open("captainsBed.mtl"), 10f);
             targetModelMap.put("bed", bed);
             world.addObject(bed);
+            world.addObject(get3DObject("captainsBed.obj","captainsBed.mtl",1f,"chips"));
+            world.addObject(get3DObject("Basketball_Post.obj",1f,"chips"));
+            world.addObject(get3DObject("ext_chairs_and_table.obj","ext_chairs_and_table.mtl",70f,"chips"));
+            world.addObject(get3DObject("dark_table_and_chairs.obj","dark_table_and_chairs.mtl",50f,"chips"));
+            world.addObject(get3DObject("contemp_living_room.obj","contemp_living_room.mtl",50f,"chips"));
+            world.addObject(get3DObject("armchair_and_table.obj","armchair_and_table.mtl",60f,"chips"));
+            world.addObject(get3DObject("one_table_and_one_chair.obj","one_table_and_one_chair.mtl",60f,"stones"));
+            world.addObject(get3DObject("garageDoor2.obj","garageDoor2.mtl",30f,"chips"));
+            world.addObject(get3DObject("storeVenitien.obj",30f,"chips"));
+            world.addObject(get3DObject("wroughtIronRails.obj",10f,"stones"));
+            world.addObject(get3DObject("smallerRailing.obj",40f,"chips"));
+            world.addObject(get3DObject("patioDoorOpened.obj",1f,"stones"));
+            world.addObject(get3DObject("basin.obj",2f,"chips"));
 
             cam = world.getCamera();
 
@@ -109,6 +123,20 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
             e.printStackTrace();
         }
 	}
+
+    private Object3D get3DObject(String objectName, String mtlName, float size, String targetName) throws IOException {
+        Object3D object3D = loadModel(mActivity.getAssets().open(objectName),mActivity.getAssets().open(mtlName), size);
+        object3D.translate(new SimpleVector(-116.768383932224, 36.1243398942542, 0));
+        targetModelMap.put(targetName, object3D);
+        return object3D;
+    }
+
+    private Object3D get3DObject(String objectName, float size, String targetName) throws IOException {
+        Object3D object3D = loadModel(mActivity.getAssets().open(objectName),null, size);
+        object3D.translate(new SimpleVector(-116.768383932224, 36.1243398942542, 0));
+        targetModelMap.put(targetName, object3D);
+        return object3D;
+    }
 
     private Object3D loadModel(InputStream objFile, InputStream mtlFile, float scale) {
 
