@@ -106,7 +106,6 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
             world.addObject(get3DObject("wroughtIronRails.obj",10f,"stones"));
             world.addObject(get3DObject("smallerRailing.obj",40f,"chips"));
             world.addObject(get3DObject("patioDoorOpened.obj",1f,"stones"));
-            world.addObject(get3DObject("basin.obj",2f,"chips"));
 
             cam = world.getCamera();
 
