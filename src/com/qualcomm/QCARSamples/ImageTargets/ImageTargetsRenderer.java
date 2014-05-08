@@ -87,11 +87,11 @@ public class ImageTargetsRenderer implements GLSurfaceView.Renderer
         try {
             sofa = loadModel(mActivity.getAssets().open("sofa1.obj"), mActivity.getAssets().open("sofa1.mtl"), 1f);
             sofa.translate(new SimpleVector(-116.768383932224, 36.1243398942542, 0));
-            targetModelMap.put("stones", sofa);
+            targetModelMap.put("sofa", sofa);
             world.addObjects(sofa);
 
             Object3D bed = loadModel(mActivity.getAssets().open("captainsBed.obj"), mActivity.getAssets().open("captainsBed.mtl"), 10f);
-            targetModelMap.put("chips", bed);
+            targetModelMap.put("bed", bed);
             world.addObject(bed);
 
             cam = world.getCamera();
